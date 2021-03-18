@@ -1,5 +1,6 @@
-.header__menu {text-align: center;}
+.btn-floating {background-color: black;}
+.brand-logo {margin-left: 15px;}
 
-.btn-primary {background-color: orangered; color: black;}
-.btn-secondary {background-color: black; color: orangered;}
- body {background-color: white;} 
+.itemLista {text-align: center;  margin-top: 3%;}
+
+nav .brand-logo {color: black;}

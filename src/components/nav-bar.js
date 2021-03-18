@@ -1,4 +1,5 @@
 import React from "react";
+import CartWidget from "./CartWidget/index"
 
 export const NavBar = () => { return ( 
 
@@ -6,16 +7,23 @@ export const NavBar = () => { return (
     
    
       <div class="header__menu">
-      <div> <h1>Gea Aromas! </h1></div>
-
-             <div class=" btn-group " role="group" aria-label="Button group with nested dropdown">
-    
-                 <button type="button" class="btn btn-primary  btn-lg">Home</button>
-                 <a class="btn btn-secondary btn-lg" href="../coder2/secciones/comoComprar.html" role="button">Como comprar</a>
-                 <a class="btn btn-secondary btn-lg" href="../coder2/secciones/envios.html" >Envios y Pagos</a>
-                 <a class="btn btn-secondary  btn-lg" href="../coder2/secciones/contactanos.html">Contactanos </a>
-                 <a class="btn btn-secondary btn-lg" href="../coder2/secciones/productos.html" role="button">Productos</a>
      
- </div>  </div> </div>  ); 
+
+      <nav>
+    <div class="nav-wrapper">
+      <a href="" class="brand-logo">Gea Aromas</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+    
+        <li><a href="">Envios</a></li>
+        <li><a href="">Contactanos</a></li>
+        <li><a href="">Productos</a></li>
+        <li> <CartWidget/> </li>   
+      </ul>
+    </div>
+  </nav>
+        
+            
+     
+ </div>  </div>  ); 
 
 };
