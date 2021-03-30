@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Item from "../Item";
 
 
 export function ItemCount ({stock, inicial}) {
@@ -9,17 +10,17 @@ const agregar = () => { setCount (count + 1 )  ;  };
 
 const remover = () => { setCount (count - 1 ) ;   };
 
-const añadirCarrito = ()=> { console.log ("usted ah seleccionado "+ (count)+ " productos")};
+const añadirCarrito = ()=> { alert("usted ah seleccionado "+ (count)+ " productos")};
 
     return (
         <div class="row">
         <div class="col s8 m3">
         
         <div class="card horizontal">
-        <div class="card-image"> </div>
         <div class="card-stacked">
         <div class="card-content">
              
+        <div class="card-image"> </div>
             <button 
                 disabled={count <=1} 
                 type= "button"
@@ -45,6 +46,12 @@ const añadirCarrito = ()=> { console.log ("usted ah seleccionado "+ (count)+ " 
          </div>
         </div>
         </div>
+      
+      
+        
+
+      
+      
         </div> )
                
 

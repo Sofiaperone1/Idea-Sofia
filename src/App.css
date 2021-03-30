@@ -15,3 +15,6 @@ nav .brand-logo {color: black;}
 .row .col.m3 {margin-left: 38%;}
 .contador {margin-right: 10%; margin-left: 10%;}
 .btn, .btn-large, .btn-small {background-color: rgb(0, 103, 121);}
+
+/*imagenes cards*/
+.card-title {color: black;}
