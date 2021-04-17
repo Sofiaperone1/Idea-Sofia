@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Item from "../Item";
 
 
-export function ItemCount ({stock, inicial}) {
+export function ItemCount ({stock, inicial, onAdd}) {
 
 const [count, setCount] = useState (parseInt(inicial));
 
@@ -10,7 +10,7 @@ const agregar = () => { setCount (count + 1 )  ;  };
 
 const remover = () => { setCount (count - 1 ) ;   };
 
-const añadirCarrito = ()=> { alert("usted ah seleccionado "+ (count)+ " productos")};
+
 
     return (
         <div class="row">
@@ -22,25 +22,27 @@ const añadirCarrito = ()=> { alert("usted ah seleccionado "+ (count)+ " product
              
         <div class="card-image"> </div>
             <button 
-                disabled={count <=1} 
+                disabled={count <=0} 
                 type= "button"
                 onClick = {remover}
                 class="btn-floating btn-medium waves-effect waves-light black"><i class="material-icons">remove</i></button>
                
                
-            <a class= "contador"> {count} </a>
+            <a href class= "contador"> {count} </a>
                
                
             <button 
                disabled={count >= stock} 
                type= "button"
                onClick = {agregar}
-               class="btn-floating btn-medium waves-effect waves-light black"><i class="material-icons">add</i></button>
+               class="btn-floating btn-medium waves-effect waves-light black"><i class="material-icons">
+                                                                                        add</i></button>
                
         </div>
            
         <div class="card-action">
-        <button class="waves-effect waves-light btn" type="button" onClick= { añadirCarrito }  >Agregar al carrito</button>
+        <button class="waves-effect waves-light btn" type="button" onClick= {()=> onAdd (count)} >
+                                                                    Agregar al carrito</button>
         
         </div>
          </div>

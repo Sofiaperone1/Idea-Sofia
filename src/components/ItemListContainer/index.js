@@ -41,7 +41,7 @@ return <div class= "itemLista" >
        
         <ItemList items={items}> </ItemList>
 
-        <ItemCount stock="8" inicial="1"></ItemCount>
+        
   
        </div>
 
