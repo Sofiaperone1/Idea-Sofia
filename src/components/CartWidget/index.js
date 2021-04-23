@@ -1,7 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
+import { CartContext } from "../../context/CartContext";
 
   export default function CartWidget () {   
   
-      return  <a class="btn-floating pulse"><i class="material-icons">shopping_cart</i></a> ;
-      
-    }
+
+    const {totalItems} = useContext (CartContext)
+
+
+    
+  
+    return <> 
+          { totalItems? 
+               <a class="btn-floating pulse"><i class="material-icons">shopping_cart</i></a> 
+            :   null }
+
+      </>   }

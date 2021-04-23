@@ -46,7 +46,7 @@ const isInCart = (id) => {  const currentItem = cart.find ( e => e.item.id === i
 
 
 
-return <CartContext.Provider value={ { cart, addItem, removeItem, clear, isInCart   } }  >   {children}    </CartContext.Provider>
+return <CartContext.Provider value={ { cart, addItem, removeItem, clear, isInCart,  } }  >   {children}    </CartContext.Provider>
 
 
  }
