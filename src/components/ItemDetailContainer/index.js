@@ -1,6 +1,9 @@
 import React , {useEffect, useState} from 'react'
 import ItemDetail from '../ItemDetail'
 import {useParams} from "react-router-dom";
+import {getFirestore} from '../../Firebase'; 
+
+
 
 const datos=  [ 
   {id:1, nombre:"Velas",categoria:'detalle', precio:200, pictureUrl:"https://http2.mlstatic.com/D_NQ_NP_859251-MLA26646040874_012018-O.webp" },
@@ -8,27 +11,41 @@ const datos=  [
   {id:3, nombre:"Sales",categoria:'detalle', precio:350, pictureUrl:"https://http2.mlstatic.com/sales-de-bano-D_NQ_NP_822421-MLM20754894508_062016-O.jpg" },
   {id:4, nombre:"Bombitas",categoria:'lista', precio:300, pictureUrl:"https://th.bing.com/th/id/OIP.JuEZdzo9OFiu_JUNbwVPigHaFj?pid=ImgDet&rs=1" },
   {id:5, nombre:"Carbones",categoria:'lista', precio:280, pictureUrl:"https://www.eldurapi.be/cms/CustomMedia/photos/Pages/es-eldurapi-AROMATICO-CARBON-DE-COCO_389_2.jpg" },
-  {id:5, nombre:"Recipientes",categoria:'lista', precio:275, pictureUrl:"https://th.bing.com/th/id/OIP.e1Oo-H8HPVjzu1A4y0mq8AHaHN?pid=ImgDet&w=600&h=584&rs=1" }
+  {id:6, nombre:"Recipientes",categoria:'lista', precio:275, pictureUrl:"https://th.bing.com/th/id/OIP.e1Oo-H8HPVjzu1A4y0mq8AHaHN?pid=ImgDet&w=600&h=584&rs=1" }
   ] 
 
 
-const getItems = () => { return new Promise ( (resolve)=> { 
+const getItems = (id) => { 
+                          const database = getFirestore ();
+                          const itemsCollection = database.collection ('items')
+                          const item = itemsCollection.doc (id)
+                          return item.get(id) ;
 
-            setTimeout ( ()=> { resolve (datos) } , 2000  )  }  )  }
+
+ }
 
 
 
 
      export default function ItemDetailContainer() {
 
-    const [datosDelItem, setDatosDelItem] = useState ({}) ;
+      const [datosDelItem, setDatosDelItem] = useState ({}) ;
 
-    const {itemId} = useParams ();
+      const {itemId, otroId} = useParams ();
     
-useEffect ( ()=> { getItems (itemId)
-                  .then ( (datos) => {setDatosDelItem (datos.find((e)=>e.id === parseInt (itemId)) )} )
+      useEffect ( ()=> {
+        
+          getItems (itemId)
+              .then ( (datos) => 
+                          { console.log ('existe', datos.exists) ; 
+                          
+                            if (datos.exists) {  setDatosDelItem({  ...datos.data()})}
+                               }
+              )
 
 
                         }, [itemId]     )                                                           
 
-return  <>  <ItemDetail item= {datosDelItem} />    </> }     
+return  <> <ItemDetail item= {datosDelItem} />    </> }     
+
+//{setDatosDelItem (datos.find((e)=>e.id === parseInt (itemId)) )}

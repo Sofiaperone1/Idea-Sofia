@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { ItemCount } from "../ItemCount";
 import {ItemList} from "../ItemList/index";
 import {useParams} from "react-router-dom"
-
+import {getFirestore} from "../../Firebase"
 
 
 export default function ItemListContainer () {
@@ -13,7 +13,7 @@ export default function ItemListContainer () {
  
   const datos = [ 
   
-    {id:1, nombre:"Velas",categoria:'detalle', precio:200, pictureUrl:"https://http2.mlstatic.com/D_NQ_NP_859251-MLA26646040874_012018-O.webp" },
+  {id:1, nombre:"Velas",categoria:'detalle', precio:200, pictureUrl:"https://http2.mlstatic.com/D_NQ_NP_859251-MLA26646040874_012018-O.webp" },
   {id:2, nombre:"Sahumerios",categoria:'detalle', precio:150, pictureUrl:"http://d3ugyf2ht6aenh.cloudfront.net/stores/604/489/products/sahucanva1-cfacf168fcd896de0715221684219844-640-0.jpg" },
   {id:3, nombre:"Sales",categoria:'detalle', precio:350, pictureUrl:"https://http2.mlstatic.com/sales-de-bano-D_NQ_NP_822421-MLM20754894508_062016-O.jpg" },
   {id:4, nombre:"Bombitas",categoria:'lista', precio:300, pictureUrl:"https://th.bing.com/th/id/OIP.JuEZdzo9OFiu_JUNbwVPigHaFj?pid=ImgDet&rs=1" },
@@ -22,15 +22,24 @@ export default function ItemListContainer () {
   ] 
   
   useEffect ( ()=> { 
+
+      const database = getFirestore ();
+      const itemsCollection = database.collection ('items');
+      const promesa = itemsCollection.get ();
    
-    const promesa =new Promise ( (resolve)=> { 
-            setTimeout ( ()=> { if (categoryId) {resolve (datos.filter (e => e.categoria === categoryId) ) }
-                                else {resolve (datos)} } , 2000  )
-       }  )
-     
-       promesa.then ( (resultado)=> { setItems (resultado) } )
-     
-       promesa.then ( (datos)=> { setItems (datos) } )   },[categoryId] )
+      promesa.then ( (snaptshot)=> { console.log ("se consultaron los datos");
+                                     console.log (snaptshot);
+                                    
+                  if (snaptshot.size > 0 ) {
+                                              console.log (snaptshot.docs.map (doc => doc.data) )
+                                              setItems(snaptshot.docs.map (doc => ({ id : doc.id , ...doc.data() }))   )
+
+                  }                   
+                                    } )
+                                 
+          //promesa.then ( (datos)=> { setItems (datos) } )         
+        
+        }, [] )
 
 return <div class= "itemLista" >
     
